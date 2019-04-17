@@ -11,6 +11,7 @@ class Person
 	String email;
 	String address;
 	String password;
+	//Marksheet mobj1 = new Marksheet();
 
 	Person()
 	{
@@ -173,6 +174,8 @@ class Person
 	}
 
 
+	
+
 
 	public void mainMenu()
 	{
@@ -205,21 +208,45 @@ class Person
 				     break;		 
 			case 7 : editName();
 				     break;	     
-			case 8 : viewMarksheet();
-					 break;	     
-		}
+			}
 	}
-
-
-	public void viewMarksheet()
-	{
-		Marksheet mobj = new Marksheet();
-		mobj.displayMksheet();
-	}
-
-
 
 }
+
+
+
+
+
+class Teacher extends Person{
+
+	Scanner s1 = new Scanner(System.in);
+	Scanner s = new Scanner(System.in);
+	
+	void getDataT()
+	{
+		this.getData();
+		mainMenu();
+	}
+
+	void putDataT()
+	{
+		this.putData();
+		mainMenu();
+	}
+
+	public void modifyMarksheet()
+	{
+
+		Marksheet mobj1 = new Marksheet();
+		mobj1.addMarksData();
+		mobj1.displayMksheet();
+	
+	}
+	
+		//mainMenu();
+}
+
+
 
 class Student extends Person{
 	int hostelno;
@@ -278,10 +305,22 @@ class Student extends Person{
 public class task5{
 	public static void main(String args[])
 	{
-	//Person obj1 = new Person();
-	//obj1.getData();
+	System.out.println("\nPRESS 1 IF YOU ARE A STUDENT OR PRESS 2 IF YOU ARE A TEACHER");
+	System.out.println("\nENTER YOUR CHOICE : ");
+	Scanner tmps = new Scanner(System.in);
+	int tmpch = tmps.nextInt();
+	if(tmpch==1)
+	{	
 	Student sobj1 = new Student();
 	sobj1.getDataS();
 	sobj1.putDataS();
 	}
-}
+	else if(tmpch==2)
+	{
+	Teacher tobj1 = new Teacher();
+	//tobj1.getDataT();
+	tobj1.modifyMarksheet();	
+	}
+	
+	}
+}	

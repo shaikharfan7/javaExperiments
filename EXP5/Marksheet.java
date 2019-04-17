@@ -1,66 +1,95 @@
+import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.*;
 public class Marksheet{
 
-	Subject sobj[] = new Subject[4];
+	ArrayList<Subject> sobj = new ArrayList<Subject>();
+	//Subject access = new Subject();
 	int totMks=0;
 	float percent;
 
 
 	Scanner s = new Scanner(System.in);
+	Scanner s1 = new Scanner(System.in);
 
-	/*public Marksheet()
+	public Marksheet()
 	{
-		for(int i=0;i<=4;i++)
+		
+	}
+
+	public void addMarksData()
+	{
+		for(int i=0;i<5;i++)
+	{	
+		System.out.println("\n===ENTER NEW MARKSHEET DETAILS===");
+		System.out.println("\nENTER SUBJECT NAME FOR SUBJECT " +(i+1) + ": ");
+		String subName = s1.nextLine();
+		System.out.println("\nENTER THEORY MARKS FOR SUBJECT " +(i+1) + ": ");
+		int thMks = s.nextInt();
+		System.out.println("\nENTER PRACTICAL MARKS FOR SUBJECT " +(i+1) + ": ");
+		int pMks = s.nextInt();
+		System.out.println("\nENTER TERMWORK MARKS FOR SUBJECT " +(i+1) + ": ");
+		int tMks = s.nextInt();
+		System.out.println("\nENTER INTERNAL MARKS FOR SUBJECT " +(i+1) + ": ");
+		int iMks = s.nextInt();
+		sobj.add(new Subject(subName,thMks,pMks,tMks,iMks));
+	}
+	}
+
+
+
+
+
+	public Marksheet(String subName,int mksTh,int mksPr,int mksTrmwrk,int mksInt)
+	{
+		
+		sobj.add(new Subject(subName,mksTh,mksPr,mksTrmwrk,mksInt));
+		
+	}
+
+	public int calcTotal()
+	{
+		for(int i=0;i<5;i++)
 		{
-			sobj[i].subName = "DEFAULT";
-			sobj[i].mksTheory = 100;
-			sobj[i].mksPrac = 100;
-			sobj[i].mksTermWrk = 100;
-			sobj[i].mksInternal = 100;
+			Subject totobj = sobj.get(i);	
+			totMks=totMks+totobj.getMarksTotal();
 		}
-	}*/
-
-
-	public void calcTotal()
-	{
-		for(int i=0;i<=4;i++)
-		{
-			totMks=totMks+sobj[i].getMarksTotal();
-		}
+		return totMks;
 	}
 
-	public void calcPercent()
+	public float calcPercent()
 	{
-		percent = (totMks/750)*100;
+		
+		percent = (totMks/875)*100;
+		return percent;
 	}
 
-	public int getMarks()
-	{
-		System.out.println("\nENTER THE SUBJECT NUMBER TO RETRIVE MARKS : ");
-		int sub = s.nextInt();
-		System.out.println("======THEORY=====INTERNALS=====PRACTICAL=====TERMWORK=====TOTAL");
-		System.out.println("========="+sobj[sub].getMarksTheory()+"======"+sobj[sub].getMarksInternal()+"======"+sobj[sub].getMarksPractical()+"======"+sobj[sub].getMarksTermwork()+"======"+sobj[sub].getMarksTotal());
-		return sobj[sub].getMarksTotal();
-	}
+	
 
 	public int  getTotal()
 	{
+		//calcTotal();
 		return totMks;
 	}
 
 	public float getPercentage()
 	{
+
 		return percent;
 	}
 
 	public void displayMksheet()
-	{ 	System.out.println("===========================RESULT==============================");
-		System.out.println("======THEORY=====INTERNALS=====PRACTICAL=====TERMWORK=====TOTAL");
-		for(int j=0;j<=4;j++)
+	{ 	System.out.println("=====================================RESULT=======================================");
+		System.out.println("SUBJECT"+"\t\t"+"THEORY(100)"+"\t"+"    INTERNALS(25)"+"\t"+"   PRACTICAL(25)"+"\t"+"     TERMWORK(25)"+"\t"+"     TOTAL(175)");
+		
+		for(int j=0;j<5;j++)
 		{
-			System.out.println("\t" +sobj[j].getMarksTheory()+"\t" + sobj[j].getMarksInternal()+"\t"+sobj[j].getMarksPractical()+"\t"+sobj[j].getMarksTermwork()+"\t"+sobj[j].getMarksTotal());
-		}	
+			Subject tmpobj = sobj.get(j);
+			System.out.println(tmpobj.getSubjectName()+"\t            " + tmpobj.getMarksTheory()+"\t\t    "+tmpobj.getMarksInternal()+"\t\t           "+tmpobj.getMarksPractical()+"\t\t\t          "+tmpobj.getMarksTermwork()+"\t\t\t    "+tmpobj.getMarksTotal());
+		}
+		System.out.println(" " + "\t" + "TOTAL = " +calcTotal());	
 	}
+
+	
 
 }
